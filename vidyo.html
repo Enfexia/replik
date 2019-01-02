@@ -6,13 +6,13 @@
         text-align: center;
     }
   </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 
 
 
-
+<div class="preloader"></div>
 
         <video src="images/1.mp4" id="video" autoplay style="height: 100%;max-width: 100%;"></video>
 
@@ -46,10 +46,23 @@
                 devameder();
             }
           }
-          $("#video").on("loadstart", function () {
-               setInterval(saayac, 100);
-           });
 
+      
+           window.addEventListener('load', function() {
+               var video = document.querySelector('#video');
+               var preloader = document.querySelector('.preloader');
+
+               function checkLoad() {
+                   if (video.readyState === 4) {
+                       preloader.parentNode.removeChild(preloader);
+                       setInterval(saayac, 100);
+                   } else {
+                       setTimeout(checkLoad, 100);
+                   }
+               }
+
+               checkLoad();
+           }, false);
 
           vid.onended = function() {
             parent.bitti()
