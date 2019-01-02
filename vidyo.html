@@ -90,6 +90,7 @@
               var loadEndPercentage = bf.end(bf.length-1) / this.duration;
               var loadPercentage = loadEndPercentage - loadStartPercentage;
               var val = loadPercentage*100;
+              console.log(val)
               console.log(video.buffered.end(0))
               console.log($('#video').attr('duration'))
               if((bf.end(bf.length-1)-bf.start(0))>5){ console.log("yuklendi") }
