@@ -1,0 +1,45 @@
+.opsiyon{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body{
+  background: black;
+}
+
+.raise:hover,
+.raise:focus {
+  box-shadow: 1px 0.5em 0.5em -0.4em var(--hover);
+      color:white;
+}
+.raise {
+  --color: #ffa260;
+  --hover: #fff;
+    transition: 0.25s;
+  color:#333333;
+font-size: 2rem;
+cursor: pointer;
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+  .raise{
+font-size: 1.5rem;
+  }
+.logo2{
+  width: 100%!important;
+}
+}
+
+.oynayan{
+width:100%;
+height:100%;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+display: table-cell;
+vertical-align: middle;
+}

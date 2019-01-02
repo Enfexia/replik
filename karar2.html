@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/karar2.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+
+<!-- Girişş
+--------->
+  <div class="row index">
+    <div class="one-third column" style="height:1px"></div>
+
+    <div class="one-third column" style="margin-top: 5%">
+
+          <object class="u-cf" data="images/logo.svg" type="image/svg+xml"  style="width:100%">
+  <img src="images/logo.png" />
+  </object>
+          <button class="baslabuton" onclick="oyunbasladi()">Başla</button>
+    </div>
+
+    <div class="one-third column" style="height:1px"></div>
+  </div>
+
+
+<!-- Logo
+-->
+    <div class="row oyuniciyuklen" style="display:none;">
+
+        <div class="twelve columns" style="height:5%;display: inline-block;position: fixed;z-index: 100;">
+            <img class="logo2" src="images/logo.png" alt="" style="height:100%;margin-left:1%;margin-top:1%;z-index:100">
+        </div>
+    </div>
+
+<!-- Video
+-->
+    <div class="row oyuniciyuklen vidyonunoldugudiv" style="display:none;
+    z-index:8;
+    text-align: center;
+     align-items: center;
+     justify-content: center;
+     height:100%">
+
+
+<!--
+
+        <video class="oynayan" autoplay loop id="playAudio">
+          <source src="images/1.mp4" type="video/mp4">
+        </video>
+-->
+    </div>
+
+
+
+<!-- Soru kızmı -->
+    <div class="row oyuniciyuklen" style="display:none;">
+
+      <div class="twelve columns secenekler" style="">
+        <div class="twelve columns yuklenme" style="">
+          <div class="twelve columns" style="background: white;height:100%;width:100%;display: inline-block;">
+
+          </div>
+        </div>
+        <div class="row" style="height:100%">
+          <div class="one-half column opsiyon" style="background:black; height:100%;"><div class="raise bir">İyiii</div></div>
+          <div class="one-half column opsiyon"  style="background:black; height:100%;"><div class="raise iki">Nasilsin</div></div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<div class="row Skor" style="display:none">
+  <div class="one-third column"  style="height:1px"></div>
+  <div class="one-third column"  style="margin-top: 10%;text-align:center"><p class="skorun">Skorun;</p><br><p class="skorun">5</p><br><button class="baslabuton" onclick="tekrarbasla()">Tekrar oyna</button></div>
+  <div class="one-third column"></div>
+</div>
+
+
+
+
+
+
+<script>
+var kullanici_yanit = "";
+
+$( ".bir" ).click(function() {
+ kullanici_yanit = 1;
+});
+
+$( ".iki" ).click(function() {
+ kullanici_yanit = 2;
+});
+
+function oyunbasladi() {
+console.log("test");
+$( ".index" ).fadeOut(250, function(){
+  $( ".oyuniciyuklen" ).fadeIn(250, duzen());
+});
+}
+
+function oyunbitti(){
+  $('.oynayan').remove()
+  $( ".oyuniciyuklen" ).fadeOut(250, function(){
+    $( ".Skor" ).fadeIn(250);
+  });
+}
+
+
+function tekrarbasla() {
+  $( ".Skor" ).fadeOut(250, oyunbasladi());
+}
+
+//document.getElementById('iframeAudio').contentWindow.durur();
+
+function bitti() {
+  console.log("video bitti")
+}
+
+function durduruldu(cevap) {
+  $( ".secenekler" ).slideToggle( 1200, function() {
+});
+}
+
+function basladi(cevap) {
+  console.log("geri basladi")
+  $( ".secenekler" ).slideToggle( 1200, function() {
+// Animation complete.
+});
+if(cevap == kullanici_yanit){
+  birsonrakividyo();
+  kullanici_yanit = "";
+}else{
+  oyunbitti()
+}
+
+}
+
+function duzen() {
+  console.log("asd")
+  $(".vidyonunoldugudiv").css("display", "flex");
+  $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo.html" allow="autoplay" id="iframeAudio" style="height: 100%;"></iframe>' );
+}
+/*
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+  if(!isChrome){
+    document.getElementById("iframeAudio").remove();
+  }
+else{
+    document.getElementById("playAudio").remove();
+}
+*/
+</script>
+
+<script type="text/javascript">
+  $( ".logo2" ).on( "click", function() {
+    //  $(".yuklenme").css("bottom", "11.5%");
+      $( ".secenekler" ).slideToggle( 1200, function() {
+    // Animation complete.
+  });
+  //$(".secenekler").css("bottom", "0");
+});
+</script>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

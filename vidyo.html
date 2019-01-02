@@ -1,0 +1,59 @@
+<html>
+<head>
+  <style media="screen">
+    body{
+        margin: 0;
+        text-align: center;
+    }
+  </style>
+</head>
+
+
+
+
+
+
+        <video src="images/1.mp4" id="video" autoplay style="height: 100%;max-width: 100%;"></video>
+
+
+
+
+
+        <script type="text/javascript">
+          var cevap = 1
+          var ilk = true;
+          var vid = document.getElementById("video");
+          var milisaniye = 0;
+          function durdur() {
+              vid.pause();
+              parent.durduruldu();
+          }
+
+          function devameder() {
+              vid.play();
+              parent.basladi(cevap);
+          }
+
+          function saayac() {
+            milisaniye += 100;
+            console.log()
+            if(ilk == true && Math.round( vid.currentTime * 10 ) / 10 == 2.8){
+                durdur();
+                ilk = false;
+            }
+            if(milisaniye == 5800){
+                devameder();
+            }
+          }
+
+          setInterval(saayac, 100);
+
+          vid.onended = function() {
+            parent.bitti()
+          };
+
+
+
+
+        </script>
+</html>
