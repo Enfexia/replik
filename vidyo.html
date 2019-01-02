@@ -45,8 +45,10 @@
                 devameder();
             }
           }
+          $("#video").on("loadstart", function () {
+               setInterval(saayac, 100);
+           });
 
-          setInterval(saayac, 100);
 
           vid.onended = function() {
             parent.bitti()
