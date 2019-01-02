@@ -110,6 +110,7 @@
 
 <script>
 var kullanici_yanit = "";
+var yuklumu = false;
 
 $( ".bir" ).click(function() {
  kullanici_yanit = 1;
@@ -121,6 +122,7 @@ $( ".iki" ).click(function() {
 
 function oyunbasladi() {
 console.log("test");
+
 $( ".index" ).fadeOut(250, function(){
   $( ".oyuniciyuklen" ).fadeIn(250, duzen());
 });
@@ -138,10 +140,17 @@ function tekrarbasla() {
   $( ".Skor" ).fadeOut(250, oyunbasladi());
 }
 
+
+
 //document.getElementById('iframeAudio').contentWindow.durur();
 
 function bitti() {
-  console.log("video bitti")
+  console.log("video bitti");
+  $('.oynayan')[0].remove();
+  $(".oynayan").css("display", "block");
+  if(yuklumu == true){
+        document.getElementById('iframeAudio').contentWindow.baslat();
+  }
 }
 
 function durduruldu(cevap) {
@@ -155,10 +164,12 @@ function basladi(cevap) {
 // Animation complete.
 });
 if(cevap == kullanici_yanit){
-  birsonrakividyo();
+  yuklumu = false;
+  $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo2.html" allow="autoplay" id="iframeAudio" style="height: 100%;display:none"></iframe>' );
   kullanici_yanit = "";
 }else{
-  oyunbitti()
+  oyunbitti();
+  kullanici_yanit = "";
 }
 
 }
@@ -167,6 +178,14 @@ function duzen() {
   console.log("asd")
   $(".vidyonunoldugudiv").css("display", "flex");
   $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo.html" allow="autoplay" id="iframeAudio" style="height: 100%;"></iframe>' );
+
+}
+
+
+function vidyoyuklendi() {
+    yuklumu = true;
+    console.log("oldu")
+    document.getElementById('iframeAudio').contentWindow.baslat();
 }
 /*
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);

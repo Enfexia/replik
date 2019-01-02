@@ -31,7 +31,7 @@
       }
     }
   </style>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 
@@ -41,14 +41,15 @@
           <div class="loading"></div>
         </div>
 
-        <video src="https://ec2-east-05-hv.ps2pdf.com/file/converter/download/Ghm8QgqQ93R-z-0-y-1.mp4" id="video" autoplay style="height: 100%;max-width: 100%;"></video>
+        <video src="images/2.mp4" id="video" style="height: 100%;max-width: 100%;"></video>
 
 
 
 
 
         <script type="text/javascript">
-          var cevap = 1
+          var cevap = 1;
+          var yukleniyor = 0;
           var ilk = true;
           var vid = document.getElementById("video");
           var milisaniye = 0;
@@ -62,9 +63,14 @@
               parent.basladi(cevap);
           }
 
+          function baslat() {
+            vid.play();
+            setInterval(saayac, 100);
+          }
+
           function saayac() {
             milisaniye += 100;
-            console.log(milisaniye)
+            //console.log(milisaniye)
             if(ilk == true && Math.round( vid.currentTime * 10 ) / 10 == 2.8){
                 durdur();
                 ilk = false;
@@ -74,6 +80,20 @@
             }
           }
 
+          video.addEventListener('progress', function() {
+              var bf = this.buffered;
+              var time = this.currentTime;
+              if(!bf.length){
+                return;
+                }
+              var loadStartPercentage = bf.start(0) / this.duration;
+              var loadEndPercentage = bf.end(bf.length-1) / this.duration;
+              var loadPercentage = loadEndPercentage - loadStartPercentage;
+              var val = loadPercentage*100;
+              console.log(video.buffered.end(0))
+              console.log($('#video').attr('duration'))
+              if((bf.end(bf.length-1)-bf.start(0))>5){ console.log("yuklendi") }
+          });
 
            window.addEventListener('load', function() {
                var video = document.querySelector('#video');
@@ -81,9 +101,9 @@
 
                function checkLoad() {
                    if (video.readyState === 4) {
-                       preloader.parentNode.removeChild(preloader);
-                       console.log("yuklendi")
-                       setInterval(saayac, 100);
+                    //   preloader.parentNode.removeChild(preloader);
+                      // console.log("yuklendi")
+                      //parent.vidyoyuklendi();
                    } else {
                        setTimeout(checkLoad, 100);
                    }

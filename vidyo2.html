@@ -1,0 +1,109 @@
+<html>
+<head>
+  <style media="screen">
+    body{
+        margin: 0;
+        text-align: center;
+    }
+
+    .loading {
+      width: 160px;
+      height: 160px;
+      border-radius: 150px;
+      border: 15px solid #fff;
+      border-top-color: rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -80px;
+      margin-left: -80px;
+      animation: loading 1.2s linear infinite;
+      z-index: 999999999;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+</head>
+
+
+
+
+        <div class="preloader"  style="height: 100%;max-width: 100%;display:flex">
+          <div class="loading"></div>
+        </div>
+
+        <video src="https://clips-media-assets2.twitch.tv/AT-cm%7C367797207.mp4" id="video" style="height: 100%;max-width: 100%;"></video>
+
+
+
+
+
+        <script type="text/javascript">
+          var cevap = 1;
+          var yukleniyor = 0;
+          var ilk = true;
+          var vid = document.getElementById("video");
+          var milisaniye = 0;
+          function durdur() {
+              vid.pause();
+              parent.durduruldu();
+          }
+
+          function devameder() {
+              vid.play();
+              parent.basladi(cevap);
+          }
+
+          function baslat() {
+            vid.play();
+            setInterval(saayac, 100);
+          }
+
+          function saayac() {
+            milisaniye += 100;
+            //console.log(milisaniye)
+            if(ilk == true && Math.round( vid.currentTime * 10 ) / 10 == 2.8){
+                durdur();
+                ilk = false;
+            }
+            if(milisaniye == 5800){
+                devameder();
+            }
+          }
+
+
+           window.addEventListener('load', function() {
+               var video = document.querySelector('#video');
+               var preloader = document.querySelector('.preloader');
+
+               function checkLoad() {
+                   if (video.readyState === 4) {
+                       preloader.parentNode.removeChild(preloader);
+                      // console.log("yuklendi")
+                       parent.vidyoyuklendi();
+                   } else {
+                       setTimeout(checkLoad, 100);
+                   }
+               }
+
+               checkLoad();
+           }, false);
+
+          vid.onended = function() {
+            parent.bitti()
+          };
+
+
+
+
+        </script>
+</html>
