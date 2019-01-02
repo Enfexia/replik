@@ -5,6 +5,31 @@
         margin: 0;
         text-align: center;
     }
+
+    .loading {
+      width: 160px;
+      height: 160px;
+      border-radius: 150px;
+      border: 15px solid #fff;
+      border-top-color: rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -80px;
+      margin-left: -80px;
+      animation: loading 1.2s linear infinite;
+      z-index: 999999999;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 
 </head>
@@ -12,7 +37,9 @@
 
 
 
-<div class="preloader"></div>
+        <div class="preloader"  style="height: 100%;max-width: 100%;display:flex">
+          <div class="loading"></div>
+        </div>
 
         <video src="https://ec2-east-05-hv.ps2pdf.com/file/converter/download/Ghm8QgqQ93R-z-0-y-1.mp4" id="video" autoplay style="height: 100%;max-width: 100%;"></video>
 
