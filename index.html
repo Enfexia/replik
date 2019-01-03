@@ -131,10 +131,6 @@
 --------- Lütfen yeteri kadar comment bırakmadığım için bana küfür etme
 --------- Çünkü kodun nasıl çalıştığını bi yerden sonra bende çok şey etmedim
 
-
-
-
-
 */
 
 
@@ -193,11 +189,11 @@ $( ".index" ).fadeOut(250, function(){
 
 
 function oyunbitti(){
-  console.log("skor sayfası yükleniyor")
+  console.log("skor sayfası yükleniyor");
   $('.oynayan')[0].remove();
   $( ".oyuniciyuklen" ).fadeOut(250, function(){
     $("body").css("background-color", "#141414");
-    $('.puanli').html(n+1);
+    $('.puanli').html(n+1-hatakontrol);
     $( ".Skor" ).fadeIn(250);
   });
 }
@@ -230,7 +226,7 @@ $('.iki').click(function() {
 });
 
 //document.getElementById('iframeAudio').contentWindow.durur();
-
+var hatakontrol = 0;
 function bitti() {
   if(yanit == false){
     console.log("yanlis cevap oyun bitti skor: " + n)
@@ -241,14 +237,43 @@ function bitti() {
     $('.oynayan')[0].remove();
     $(".oynayan").css("display", "block");
     if(yuklumu == true){
-      console.log("video başlıyor")
-          document.getElementById('iframeAudio').contentWindow.baslat();
+      console.log("video başlıyor");
+      if($('.oynayan').length == 2){
+        $('.oynayan')[0].remove();
+      }else if($('.oynayan').length == 1){
+        document.getElementById('iframeAudio').contentWindow.baslat();
+      }else if($('.oynayan').attr('src') == "vidyoundefined.html"){
+
+          $('.oynayan').remove();
+          console.log(n)
+          $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n+1] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;display:none"></iframe>' );
+          $(".oynayan").css("display", "flex");
+          n++
+          hatakontrol++
+      }else if($('.oynayan').length == 0 && n < 10 ){
+        console.log(n)
+        $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n+1] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;display:none"></iframe>' );
+        $(".oynayan").css("display", "flex");
+        n++
+        hatakontrol++
+      }else{
+        yanit = false;
+        bitti();
+      }
+
+    }else {
+      $('.oynayan').remove();
+      console.log(n)
+      $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n+1] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;display:none"></iframe>' );
+      $(".oynayan").css("display", "flex");
+      n++
+      hatakontrol++
     }
   }
 }
 
 
-
+var panel = 0;
 
 function durduruldu() {
       console.log("video durur")
@@ -258,6 +283,9 @@ function durduruldu() {
 
   console.log("panel açıldı " + n + ". soru")
   $( ".secenekler" ).slideToggle( 1200, function() {
+    panel++;
+    console.log(panel)
+                 //2                                                        --------------------------------------------------
     var counter = 5;
     setInterval(function() {
       counter--;
@@ -283,6 +311,14 @@ function basladi(cevap) {
 });
 console.log("cevap kontrolu")
 if(cevap == kullanici_yanit){
+  if(n+1-hatakontrol == panel){
+
+  }else{
+    yanit = false
+    kullanici_yanit = "";
+    $('.iki').removeClass("baskin");
+    $('.bir').removeClass("baskin");
+  }
   yuklumu = false;
   skor++
   $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n+1] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;display:none"></iframe>' );
@@ -335,6 +371,7 @@ else{
 </script>
 
 <script type="text/javascript">
+//1,2,3,4,5,6,7,8,9,10,11
 var array = [1,2,3,4,5,6,7,8,9,10,11];
 //
 
