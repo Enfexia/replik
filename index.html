@@ -99,7 +99,7 @@
 
 <div class="row Skor" style="display:none">
   <div class="one-third column"  style="height:1px"></div>
-  <div class="one-third column"  style="margin-top: 10%;text-align:center"><p class="skorun">Skorun</p><br><p class="skorun puanli"></p><br><button class="baslabuton" onclick="tekrarbasla()" style="margin-top: 30%!important;">Bi'daha</button></div>
+  <div class="one-third column"  style="margin-top: 10%;text-align:center"><p class="skorun">Skorun</p><br><p class="skorun puanli"></p><br><button class="baslabuton" onclick="tekrarbasla()" style="margin-top: 10%!important;">Bi'daha</button></div>
   <div class="one-third column"><img onclick="mezdeke()" src="https://mezdeke.cemcevik.com/images/batu.png" style="    border: 0;
     width: 70px;
     margin-top: 10px;
@@ -200,6 +200,8 @@ function bitti() {
 
 
 function durduruldu(cevap) {
+  $('.bir').html(a);
+  $('.iki').html(b);
   $( ".secenekler" ).slideToggle( 1200, function() {
     var counter = 5;
     setInterval(function() {
@@ -219,9 +221,7 @@ function durduruldu(cevap) {
 }
 
 function basladi(cevap) {
-  ("geri basladi")
   $( ".secenekler" ).slideToggle( 1200, function() {
-
 });
 
 if(cevap == kullanici_yanit){
@@ -240,6 +240,8 @@ if(cevap == kullanici_yanit){
 }else{
     yanit = false
     kullanici_yanit = "";
+    $('.iki').removeClass("baskin");
+    $('.bir').removeClass("baskin");
 }
 
 
@@ -254,14 +256,15 @@ function duzen() {
   $(".vidyonunoldugudiv").css("display", "flex");
   $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;"></iframe>' );
 }
-
+var a = "";
+var b = "";
 
 function vidyoyuklendi(soru1,soru2) {
+   a = soru1;
+   b = soru2;
     yuklumu = true;
-
     document.getElementById('iframeAudio').contentWindow.baslat();
-    $('.bir').html(soru1);
-    $('.iki').html(soru2);
+
 }
 /*
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
