@@ -169,7 +169,7 @@ function oyunbitti(){
   $('.oynayan')[0].remove();
   $( ".oyuniciyuklen" ).fadeOut(250, function(){
     $("body").css("background-color", "#141414");
-    $('.puanli').html(skor);
+    $('.puanli').html(n+1);
     $( ".Skor" ).fadeIn(250);
   });
 }
@@ -248,6 +248,7 @@ function durduruldu() {
 }
 
 function basladi(cevap) {
+  console.log(n);
       console.log("video devam eder")
     console.log("panel kapandı " + n + ". soru")
   $( ".secenekler" ).slideToggle( 1200, function() {
@@ -281,7 +282,6 @@ if(cevap == kullanici_yanit){
 
 
 function duzen() {
-  skor = 0;
   $(".vidyonunoldugudiv").css("display", "flex");
   $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;"></iframe>' );
 }
