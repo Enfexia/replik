@@ -152,8 +152,8 @@ $( ".iki" ).click(function() {
 });
 
 function oyunbasladi() {
-skor = 0;
-sira = shuffle(array);
+
+sira = shuffle(array)
 console.log(sira)
 
 $("body").css("background-color", "black");
@@ -281,7 +281,7 @@ if(cevap == kullanici_yanit){
 
 
 function duzen() {
-
+  skor = 0;
   $(".vidyonunoldugudiv").css("display", "flex");
   $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;"></iframe>' );
 }
