@@ -122,7 +122,7 @@
 
 
 <script>
-
+var n = 0
 if ($(window).width() < 768) {
    $('body').remove()
    $('html').append('<h1 style="color:white;">Mobilde site çalışmamaktadır <br> lütfen desktop dan giriniz</h1>')
@@ -133,6 +133,7 @@ else {
 function mezdeke() {
   window.open("http://mezdeke.cemcevik.com");
 }
+
 var skor = 0;
 var kullanici_yanit = "";
 var yuklumu = false;
@@ -149,7 +150,7 @@ $( ".iki" ).click(function() {
 function oyunbasladi() {
 
 sira = shuffle(array);
-n = 0
+
 
 $("body").css("background-color", "black");
 $( ".index" ).fadeOut(250, function(){
@@ -216,9 +217,11 @@ function bitti() {
 
 
 
-function durduruldu(cevap) {
+function durduruldu() {
   $('.bir').html(a);
   $('.iki').html(b);
+
+  console.log("panel açıldı " + n + ". soru")
   $( ".secenekler" ).slideToggle( 1200, function() {
     var counter = 5;
     setInterval(function() {
@@ -238,6 +241,7 @@ function durduruldu(cevap) {
 }
 
 function basladi(cevap) {
+    console.log("panel kapandı " + n + ". soru")
   $( ".secenekler" ).slideToggle( 1200, function() {
 });
 
