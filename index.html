@@ -48,9 +48,8 @@
 
     <div class="one-third column" style="margin-top: 5%">
 
-          <object class="u-cf" data="images/logo.svg" type="image/svg+xml"  style="width:100%">
-  <img src="images/logo.png" />
-  </object>
+  <img class="twelve columns" src="images/logo.png" style="width:100%" />
+
           <button class="baslabuton" onclick="oyunbasladi()">Başla</button>
     </div>
 
@@ -77,9 +76,9 @@
      height:100%">
 
 
-<!--
 
-        <video class="oynayan" autoplay loop id="playAudio">
+<!--
+        <video class="oynayan" playsinline muted  autoplay loop id="playAudio">
           <source src="images/1.mp4" type="video/mp4">
         </video>
 -->
@@ -125,14 +124,13 @@
 var n = 0
 
 
-/* Mobilll
 if ($(window).width() < 768) {
    $('body').remove()
    $('html').append('<h1 style="color:white;">Mobilde site çalışmamaktadır <br> lütfen desktop dan giriniz</h1>')
 }
 else {
 }
-*/
+
 
 
 function mezdeke() {
@@ -171,8 +169,9 @@ function oyunbitti(){
   $('.oynayan')[0].remove();
   $( ".oyuniciyuklen" ).fadeOut(250, function(){
     $("body").css("background-color", "#141414");
-    $('.puanli').html(skor)
+    $('.puanli').html(skor);
     $( ".Skor" ).fadeIn(250);
+    skor = 0;
   });
 }
 
