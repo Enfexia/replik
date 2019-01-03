@@ -41,7 +41,7 @@
           <div class="loading"></div>
         </div>
 
-        <video src="" id="video" style="height: 100%;max-width: 100%;"></video>
+        <video src="" id="video" style="height: 100%;max-width: 100%;display:none"></video>
 
 
 
@@ -92,6 +92,7 @@
                 var preloader = document.querySelector('.preloader');
                 preloader.parentNode.removeChild(preloader);
                 video.src = vid;
+                $("#video").css("display", "flex");
                 parent.vidyoyuklendi();
                  // IE10+
                 // Video is now downloaded

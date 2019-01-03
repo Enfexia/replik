@@ -31,7 +31,7 @@
       }
     }
   </style>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 
@@ -41,7 +41,7 @@
           <div class="loading"></div>
         </div>
 
-        <video src="https://clips-media-assets2.twitch.tv/AT-cm%7C367797207.mp4" id="video" style="height: 100%;max-width: 100%;"></video>
+        <video src="" id="video" style="height: 100%;max-width: 100%;display:none"></video>
 
 
 
@@ -80,16 +80,41 @@
             }
           }
 
+          var req = new XMLHttpRequest();
+          req.open('GET', 'images/2-1.mp4', true);
+          req.responseType = 'blob';
+          req.onload = function() {
+             // Onload is triggered even on 404
+             // so we need to check the status code
+             if (this.status === 200) {
+                var videoBlob = this.response;
+                var vid = URL.createObjectURL(videoBlob);
+                var preloader = document.querySelector('.preloader');
+                preloader.parentNode.removeChild(preloader);
+                video.src = vid;
+                $("#video").css("display", "flex");
+                parent.vidyoyuklendi();
+                 // IE10+
+                // Video is now downloaded
+                // and we can set it as source on the video element
 
+             }
+          }
+          req.onerror = function() {
+             // Error
+          }
+
+          req.send();
+/*
            window.addEventListener('load', function() {
                var video = document.querySelector('#video');
                var preloader = document.querySelector('.preloader');
 
                function checkLoad() {
                    if (video.readyState === 4) {
-                       preloader.parentNode.removeChild(preloader);
+                    //   preloader.parentNode.removeChild(preloader);
                       // console.log("yuklendi")
-                       parent.vidyoyuklendi();
+                      //parent.vidyoyuklendi();
                    } else {
                        setTimeout(checkLoad, 100);
                    }
@@ -97,6 +122,7 @@
 
                checkLoad();
            }, false);
+*/
 
           vid.onended = function() {
             parent.bitti()
