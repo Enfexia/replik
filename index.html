@@ -113,6 +113,14 @@
 
 
 <script>
+
+if ($(window).width() < 768) {
+   $('body').remove()
+   $('html').append('<h1 style="color:white;">Mobilde site çalışmamaktadır <br> lütfen desktop dan giriniz</h1>')
+}
+else {
+}
+
 function mezdeke() {
   window.open("http://mezdeke.cemcevik.com");
 }
