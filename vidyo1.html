@@ -54,6 +54,7 @@
           var yukleniyor = 0;
           var ilk = true;
           var vid = document.getElementById("video");
+          vid.volume = 0.2;
           var milisaniye = 0;
           function durdur() {
               vid.pause();
@@ -81,7 +82,7 @@
                 ilk = false;
             }//10000
             if(milisaniye == 10000){
-          
+
                 devameder();
             }
           }

@@ -54,6 +54,7 @@
           var yukleniyor = 0;
           var ilk = true;
           var vid = document.getElementById("video");
+          vid.volume = 0.2;
           var milisaniye = 0;
           function durdur() {
               vid.pause();
@@ -72,7 +73,7 @@
 
           function saayac() {
               milisaniye += 100;
-          
+
               if(ilk == true && Math.round(vid.currentTime * 10 ) / 10 == 17){  ////
                   durdur();
                   ilk = false;

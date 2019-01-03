@@ -54,6 +54,7 @@
           var yukleniyor = 0;
           var ilk = true;
           var vid = document.getElementById("video");
+          vid.volume = 0.2;
           var milisaniye = 0;
           function durdur() {
               vid.pause();
@@ -77,7 +78,7 @@
                   durdur();
                   ilk = false;
                   var counter = 7;
-          
+
                   setInterval(function() {
                     counter--;
                     if (counter >= 0) {
