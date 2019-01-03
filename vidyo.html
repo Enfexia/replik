@@ -41,7 +41,7 @@
           <div class="loading"></div>
         </div>
 
-        <video src="https://clips-media-assets2.twitch.tv/AT-cm%7C368877847.mp4" id="video" style="height: 100%;max-width: 100%;"></video>
+        <video src="" id="video" style="height: 100%;max-width: 100%;"></video>
 
 
 
@@ -80,22 +80,31 @@
             }
           }
 
-          video.addEventListener('progress', function() {
-              var bf = this.buffered;
-              var time = this.currentTime;
-              if(!bf.length){
-                return;
-                }
-              var loadStartPercentage = bf.start(0) / this.duration;
-              var loadEndPercentage = bf.end(bf.length-1) / this.duration;
-              var loadPercentage = loadEndPercentage - loadStartPercentage;
-              var val = loadPercentage*100;
-              console.log(val)
-              console.log(video.buffered.end(0))
-              console.log($('#video').attr('duration'))
-              if((bf.end(bf.length-1)-bf.start(0))>5){ console.log("yuklendi") }
-          });
+          var req = new XMLHttpRequest();
+          req.open('GET', '/images/2.mp4', true);
+          req.responseType = 'blob';
+          req.onload = function() {
+             // Onload is triggered even on 404
+             // so we need to check the status code
+             if (this.status === 200) {
+                var videoBlob = this.response;
+                var vid = URL.createObjectURL(videoBlob);
+                var preloader = document.querySelector('.preloader');
+                preloader.parentNode.removeChild(preloader);
+                video.src = vid;
+                parent.vidyoyuklendi();
+                 // IE10+
+                // Video is now downloaded
+                // and we can set it as source on the video element
 
+             }
+          }
+          req.onerror = function() {
+             // Error
+          }
+
+          req.send();
+/*
            window.addEventListener('load', function() {
                var video = document.querySelector('#video');
                var preloader = document.querySelector('.preloader');
@@ -112,6 +121,7 @@
 
                checkLoad();
            }, false);
+*/
 
           vid.onended = function() {
             parent.bitti()
