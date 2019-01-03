@@ -152,7 +152,7 @@ $( ".iki" ).click(function() {
 });
 
 function oyunbasladi() {
-
+skor = 0;
 sira = shuffle(array);
 console.log(sira)
 
@@ -171,7 +171,6 @@ function oyunbitti(){
     $("body").css("background-color", "#141414");
     $('.puanli').html(skor);
     $( ".Skor" ).fadeIn(250);
-    skor = 0;
   });
 }
 
