@@ -137,6 +137,7 @@ function mezdeke() {
 var skor = 0;
 var kullanici_yanit = "";
 var yuklumu = false;
+var yanit = true;
 
 $( ".bir" ).click(function() {
  kullanici_yanit = 1;
@@ -150,7 +151,7 @@ $( ".iki" ).click(function() {
 function oyunbasladi() {
 
 sira = shuffle(array);
-
+console.log(sira)
 
 $("body").css("background-color", "black");
 $( ".index" ).fadeOut(250, function(){
@@ -161,7 +162,8 @@ $( ".index" ).fadeOut(250, function(){
 
 
 function oyunbitti(){
-  $('.oynayan').remove();
+  console.log("skor sayfası yükleniyor")
+  $('.oynayan')[0].remove();
   $( ".oyuniciyuklen" ).fadeOut(250, function(){
     $("body").css("background-color", "#141414");
     $('.puanli').html(skor)
@@ -200,24 +202,26 @@ $('.iki').click(function() {
 
 function bitti() {
   if(yanit == false){
+    console.log("yanlis cevap oyun bitti skor: " + n)
     oyunbitti();
     yanit = true;
   }else{
+    console.log("dogru cevap devam ediliyor")
     $('.oynayan')[0].remove();
     $(".oynayan").css("display", "block");
     if(yuklumu == true){
+      console.log("video başlıyor")
           document.getElementById('iframeAudio').contentWindow.baslat();
     }
   }
-
-
-
 }
 
 
 
 
 function durduruldu() {
+      console.log("video durur")
+      console.log("şıklar yenilendi")
   $('.bir').html(a);
   $('.iki').html(b);
 
@@ -241,10 +245,11 @@ function durduruldu() {
 }
 
 function basladi(cevap) {
+      console.log("video devam eder")
     console.log("panel kapandı " + n + ". soru")
   $( ".secenekler" ).slideToggle( 1200, function() {
 });
-
+console.log("cevap kontrolu")
 if(cevap == kullanici_yanit){
   yuklumu = false;
   skor++
@@ -269,7 +274,7 @@ if(cevap == kullanici_yanit){
 }
 
 
-yanit = true;
+
 
 
 function duzen() {

@@ -63,21 +63,25 @@
           function devameder() {
               vid.play();
               parent.basladi(cevap);
+
           }
 
           function baslat() {
             vid.play();
             setInterval(saayac, 100);
+
           }
 
           function saayac() {
             milisaniye += 100;
             //console.log(milisaniye)
             if(ilk == true && Math.round( vid.currentTime * 10 ) / 10 == 2.8){
+
                 durdur();
                 ilk = false;
             }//10000
             if(milisaniye == 10000){
+          
                 devameder();
             }
           }
