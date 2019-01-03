@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,700');
+
 body,html{
   background: black;
   height: 100%;
@@ -19,10 +21,14 @@ max-height: 100%
 }
 
 
-.raise:hover,
-.raise:focus {
+.raise:hover {
   box-shadow: 1px 0.5em 0.5em -0.4em var(--hover);
       color:white;
+}
+
+.baskin{
+  color:white!important;
+    box-shadow: 1px 0.7em 0.5em -0.4em var(--hover)!important;
 }
 
 .raise {
@@ -73,6 +79,9 @@ color: white;
 border:none;
 transition: all 0.5s ease;
 text-align: center;
+font-family: 'Muli', sans-serif;
+font-weight: 700;
+margin-top: 50%;
 }
 
 .baslabuton:hover {
@@ -82,6 +91,8 @@ font-size: 4.5rem;
 margin-left:5px;
 background: #E6E6E6;
 color:black;
+font-family: 'Muli', sans-serif;
+font-weight: 700;
 }
 
 
@@ -90,10 +101,15 @@ color:black;
   .baslabuton{
   height: 80px;
   font-size: 2rem;
+  font-family: 'Muli', sans-serif;
+  font-weight: 700;
+  margin-top: 80%;
   }
   .baslabuton:hover {
   width: 100%;
   height: 87px;
+  font-family: 'Muli', sans-serif;
+  font-weight: 700;
   }
   .raise{
 font-size: 1.5rem;

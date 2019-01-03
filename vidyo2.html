@@ -48,7 +48,9 @@
 
 
         <script type="text/javascript">
-          var cevap = 1;
+          var soru1 = "Can Acıtmıyo";
+          var soru2 = "Can Acıtıyo";
+          var cevap = 2;
           var yukleniyor = 0;
           var ilk = true;
           var vid = document.getElementById("video");
@@ -69,19 +71,32 @@
           }
 
           function saayac() {
-            milisaniye += 100;
-            //console.log(milisaniye)
-            if(ilk == true && Math.round( vid.currentTime * 10 ) / 10 == 2.8){
-                durdur();
-                ilk = false;
-            }
-            if(milisaniye == 5800){
-                devameder();
-            }
+              milisaniye += 100;
+
+              if(ilk == true && Math.round(vid.currentTime * 10 ) / 10 == 15){
+                  durdur();
+                  ilk = false;
+                  var counter = 7;
+      
+                  setInterval(function() {
+                    counter--;
+                    if (counter >= 0) {
+
+                    }
+                    // Display 'counter' wherever you want to display it.
+                    if (counter === 0) {
+                      devameder();
+                    //    alert('this is where it happens');
+                        clearInterval(counter);
+                    }
+
+                  }, 950);
+
+              }
           }
 
           var req = new XMLHttpRequest();
-          req.open('GET', 'images/2-1.mp4', true);
+          req.open('GET', 'images/2.mp4', true);
           req.responseType = 'blob';
           req.onload = function() {
              // Onload is triggered even on 404
@@ -92,8 +107,8 @@
                 var preloader = document.querySelector('.preloader');
                 preloader.parentNode.removeChild(preloader);
                 video.src = vid;
-                $("#video").css("display", "flex");
-                parent.vidyoyuklendi();
+                $("#video").css("display", "inline");
+                parent.vidyoyuklendi(soru1,soru2);
                  // IE10+
                 // Video is now downloaded
                 // and we can set it as source on the video element

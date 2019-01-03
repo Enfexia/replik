@@ -1,0 +1,150 @@
+<html>
+<head>
+  <style media="screen">
+    body{
+        margin: 0;
+        text-align: center;
+    }
+
+    .loading {
+      width: 160px;
+      height: 160px;
+      border-radius: 150px;
+      border: 15px solid #fff;
+      border-top-color: rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -80px;
+      margin-left: -80px;
+      animation: loading 1.2s linear infinite;
+      z-index: 999999999;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+
+
+
+        <div class="preloader"  style="height: 100%;max-width: 100%;display:flex">
+          <div class="loading"></div>
+        </div>
+
+        <video src="" id="video" style="height: 100%;max-width: 100%;display:none"></video>
+
+
+
+
+
+        <script type="text/javascript">
+          var soru1 = "Güzel Bişi Çıkıyo";          //
+          var soru2 = "Baş Çıkıyo";                  ///
+          var cevap = 1;                             ///
+          var yukleniyor = 0;
+          var ilk = true;
+          var vid = document.getElementById("video");
+          var milisaniye = 0;
+          function durdur() {
+              vid.pause();
+              parent.durduruldu();
+          }
+
+          function devameder() {
+              vid.play();
+              parent.basladi(cevap);
+          }
+
+          function baslat() {
+            vid.play();
+            setInterval(saayac, 100);
+          }
+
+          function saayac() {
+              milisaniye += 100;
+
+              if(ilk == true && Math.round(vid.currentTime * 10 ) / 10 == 10){  ////
+                  durdur();
+                  ilk = false;
+                  var counter = 7;
+          
+                  setInterval(function() {
+                    counter--;
+                    if (counter >= 0) {
+
+                    }
+                    // Display 'counter' wherever you want to display it.
+                    if (counter === 0) {
+                      devameder();
+                    //    alert('this is where it happens');
+                        clearInterval(counter);
+                    }
+
+                  }, 950);
+
+              }
+          }
+
+          var req = new XMLHttpRequest();
+          req.open('GET', 'images/3.mp4', true);   ////
+          req.responseType = 'blob';
+          req.onload = function() {
+             // Onload is triggered even on 404
+             // so we need to check the status code
+             if (this.status === 200) {
+                var videoBlob = this.response;
+                var vid = URL.createObjectURL(videoBlob);
+                var preloader = document.querySelector('.preloader');
+                preloader.parentNode.removeChild(preloader);
+                video.src = vid;
+                $("#video").css("display", "inline");
+                parent.vidyoyuklendi(soru1,soru2);
+                 // IE10+
+                // Video is now downloaded
+                // and we can set it as source on the video element
+
+             }
+          }
+          req.onerror = function() {
+             // Error
+          }
+
+          req.send();
+/*
+           window.addEventListener('load', function() {
+               var video = document.querySelector('#video');
+               var preloader = document.querySelector('.preloader');
+
+               function checkLoad() {
+                   if (video.readyState === 4) {
+                    //   preloader.parentNode.removeChild(preloader);
+                      // console.log("yuklendi")
+                      //parent.vidyoyuklendi();
+                   } else {
+                       setTimeout(checkLoad, 100);
+                   }
+               }
+
+               checkLoad();
+           }, false);
+*/
+
+          vid.onended = function() {
+            parent.bitti()
+          };
+
+
+
+
+        </script>
+</html>

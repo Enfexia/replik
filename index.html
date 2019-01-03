@@ -83,13 +83,13 @@
 
       <div class="twelve columns secenekler" style="">
         <div class="twelve columns yuklenme" style="">
-          <div class="twelve columns" style="background: white;height:100%;width:100%;display: inline-block;">
+          <div class="twelve columns sure" style="background: white;height:100%;width:100%;display: inline-block;  transition: 1s;">
 
           </div>
         </div>
         <div class="row" style="height:100%">
-          <div class="one-half column opsiyon" style="background:black; height:100%;"><div class="raise bir">İyiii</div></div>
-          <div class="one-half column opsiyon"  style="background:black; height:100%;"><div class="raise iki">Nasilsin</div></div>
+          <div class="one-half column opsiyon" style="background:black; height:100%;"><div class="raise"><span class="bir"></span></div></div>
+          <div class="one-half column opsiyon"  style="background:black; height:100%;"><div class="raise "><span class="iki"></span></div></div>
         </div>
       </div>
     </div>
@@ -99,8 +99,12 @@
 
 <div class="row Skor" style="display:none">
   <div class="one-third column"  style="height:1px"></div>
-  <div class="one-third column"  style="margin-top: 10%;text-align:center"><p class="skorun">Skorun;</p><br><p class="skorun">5</p><br><button class="baslabuton" onclick="tekrarbasla()" style="margin-top: 30%!important;">Bi'daha</button></div>
-  <div class="one-third column"></div>
+  <div class="one-third column"  style="margin-top: 10%;text-align:center"><p class="skorun">Skorun</p><br><p class="skorun puanli"></p><br><button class="baslabuton" onclick="tekrarbasla()" style="margin-top: 30%!important;">Bi'daha</button></div>
+  <div class="one-third column"><img onclick="mezdeke()" src="https://mezdeke.cemcevik.com/images/batu.png" style="    border: 0;
+    width: 70px;
+    margin-top: 10px;
+    float: right;
+    margin-right: 10px;"></div>
 </div>
 
 
@@ -109,6 +113,10 @@
 
 
 <script>
+function mezdeke() {
+  window.open("http://mezdeke.cemcevik.com");
+}
+var skor = 0;
 var kullanici_yanit = "";
 var yuklumu = false;
 
@@ -117,20 +125,28 @@ $( ".bir" ).click(function() {
 });
 
 $( ".iki" ).click(function() {
+
  kullanici_yanit = 2;
 });
 
 function oyunbasladi() {
-console.log("test");
 
+sira = shuffle(array);
+n = 0
+
+$("body").css("background-color", "black");
 $( ".index" ).fadeOut(250, function(){
   $( ".oyuniciyuklen" ).fadeIn(250, duzen());
 });
 }
 
+
+
 function oyunbitti(){
-  $('.oynayan').remove()
+  $('.oynayan').remove();
   $( ".oyuniciyuklen" ).fadeOut(250, function(){
+    $("body").css("background-color", "#141414");
+    $('.puanli').html(skor)
     $( ".Skor" ).fadeIn(250);
   });
 }
@@ -142,50 +158,110 @@ function tekrarbasla() {
 
 
 
+$('.bir').click(function() {
+  if($('.iki').hasClass( "baskin" ) == true){
+    $('.iki').removeClass("baskin");
+    $(this).toggleClass('baskin');
+  }else{
+    $(this).toggleClass('baskin');
+  }
+
+});
+
+$('.iki').click(function() {
+  if($('.bir').hasClass( "baskin" ) == true){
+    $('.bir').removeClass("baskin");
+    $(this).toggleClass('baskin');
+  }else{
+    $(this).toggleClass('baskin');
+  }
+
+});
+
 //document.getElementById('iframeAudio').contentWindow.durur();
 
 function bitti() {
-  console.log("video bitti");
-  $('.oynayan')[0].remove();
-  $(".oynayan").css("display", "block");
-  if(yuklumu == true){
-        document.getElementById('iframeAudio').contentWindow.baslat();
+  if(yanit == false){
+    oyunbitti();
+    yanit = true;
+  }else{
+    $('.oynayan')[0].remove();
+    $(".oynayan").css("display", "block");
+    if(yuklumu == true){
+          document.getElementById('iframeAudio').contentWindow.baslat();
+    }
   }
+
+
+
 }
+
+
+
 
 function durduruldu(cevap) {
   $( ".secenekler" ).slideToggle( 1200, function() {
-});
+    var counter = 5;
+    setInterval(function() {
+      counter--;
+      if (counter >= 0) {
+        tamsayi = counter * 20
+       $(".sure").css("width",JSON.stringify(tamsayi) + "%")
+      }
+      // Display 'counter' wherever you want to display it.
+      if (counter === 0) {
+      //    alert('this is where it happens');
+          clearInterval(counter);
+      }
+
+    }, 1000);
+})
 }
 
 function basladi(cevap) {
-  console.log("geri basladi")
+  ("geri basladi")
   $( ".secenekler" ).slideToggle( 1200, function() {
-// Animation complete.
+
 });
+
 if(cevap == kullanici_yanit){
   yuklumu = false;
-  $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo2.html" allow="autoplay" id="iframeAudio" style="height: 100%;display:none"></iframe>' );
+  skor++
+  $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n+1] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;display:none"></iframe>' );
   kullanici_yanit = "";
+  if(n == 10){
+  window.location.replace("http://mezdeke.cemcevik.com");
+  }else{
+    n++;
+    $('.iki').removeClass("baskin");
+    $('.bir').removeClass("baskin");
+  }
+
 }else{
-  oyunbitti();
-  kullanici_yanit = "";
+    yanit = false
+    kullanici_yanit = "";
 }
 
+
 }
+
+
+yanit = true;
+
 
 function duzen() {
-  console.log("asd")
-  $(".vidyonunoldugudiv").css("display", "flex");
-  $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo.html" allow="autoplay" id="iframeAudio" style="height: 100%;"></iframe>' );
 
+  $(".vidyonunoldugudiv").css("display", "flex");
+  $(".vidyonunoldugudiv").append( '<iframe class="oynayan" frameBorder="0" src="vidyo'+ sira[n] +'.html" allow="autoplay" id="iframeAudio" style="height: 100%;"></iframe>' );
 }
 
 
-function vidyoyuklendi() {
+function vidyoyuklendi(soru1,soru2) {
     yuklumu = true;
-    console.log("oldu")
+
     document.getElementById('iframeAudio').contentWindow.baslat();
+    $('.bir').html(soru1);
+    $('.iki').html(soru2);
 }
 /*
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
@@ -199,13 +275,28 @@ else{
 </script>
 
 <script type="text/javascript">
-  $( ".logo2" ).on( "click", function() {
-    //  $(".yuklenme").css("bottom", "11.5%");
-      $( ".secenekler" ).slideToggle( 1200, function() {
-    // Animation complete.
-  });
-  //$(".secenekler").css("bottom", "0");
-});
+var array = [1,2,3,4,5,6,7,8,9,10,11];
+
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 </script>
 
 <!-- End Document
