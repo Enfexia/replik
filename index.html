@@ -193,7 +193,7 @@ function oyunbitti(){
   $('.oynayan')[0].remove();
   $( ".oyuniciyuklen" ).fadeOut(250, function(){
     $("body").css("background-color", "#141414");
-    $('.puanli').html(n+1-hatakontrol);
+    $('.puanli').html(n-hatakontrol);
     $( ".Skor" ).fadeIn(250);
   });
 }
