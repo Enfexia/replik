@@ -228,6 +228,12 @@ $('.iki').click(function() {
 //document.getElementById('iframeAudio').contentWindow.durur();
 var hatakontrol = 0;
 function bitti() {
+
+      if($('.oynayan').length == 2){
+        $('.oynayan')[0].remove();
+      }else{
+
+      }
   if(yanit == false){
     console.log("yanlis cevap oyun bitti skor: " + n)
     oyunbitti();
@@ -282,6 +288,9 @@ function durduruldu() {
   $('.iki').html(b);
 
   console.log("panel açıldı " + n + ". soru")
+
+
+
   $( ".secenekler" ).slideToggle( 1200, function() {
     panel++;
     console.log(panel)
@@ -356,6 +365,8 @@ function vidyoyuklendi(soru1,soru2) {
    a = soru1;
    b = soru2;
     yuklumu = true;
+
+
     document.getElementById('iframeAudio').contentWindow.baslat();
 
 }
